@@ -14,7 +14,7 @@ export function main() {
 			const prDiffStr = await prDiff.text();
 
 			const comp = await getCompletions(prDiffStr);
-			return Response.json(comp);
+			return Response.json(comp, { status: 200 });
 		} else {
 			return new Response("Unsupported method " + req.method, {
 				status: 404,
