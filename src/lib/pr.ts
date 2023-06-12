@@ -1,5 +1,5 @@
 import { PRMetadata } from "./types.ts";
 
-export function getPRDiff({ repoUrl }: PRMetadata) {
-	return fetch(repoUrl + ".diff", { method: "GET" });
+export function getPRDiff({ prUrl }: PRMetadata) {
+	return fetch(prUrl + ".diff", { method: "GET" });
 }
