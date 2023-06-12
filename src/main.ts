@@ -14,7 +14,13 @@ export function main() {
 			const prDiffStr = await prDiff.text();
 
 			const comp = await getCompletions(prDiffStr);
-			return Response.json(comp, { status: 200 });
+			return Response.json(comp, {
+				status: 200,
+				headers: {
+					"Access-Control-Allow-Origin": "*",
+					"Access-Control-Allow-Methods": "POST",
+				},
+			});
 		} else {
 			return new Response("Unsupported method " + req.method, {
 				status: 404,
