@@ -6,9 +6,13 @@ import type { PRMetadata } from "./lib/types.ts";
 
 export function main() {
 	return serve(async (req: Request) => {
-		if (req.method === "POST") {
+		const path = new URL(req.url).pathname;
+
+		if (path === "/" && req.method === "POST") {
 			const body: PRMetadata = await req.json();
-			if (typeof body !== "object") throw Error("Failed to parse request body");
+			if (typeof body !== "object") {
+				throw Error("Failed to parse request body");
+			}
 
 			const prDiff = await getPRDiff(body);
 			const comp = await getCompletions(prDiff);
@@ -16,11 +20,13 @@ export function main() {
 				status: 200,
 				headers: {
 					"Access-Control-Allow-Origin": "*",
-					"Access-Control-Allow-Methods": "POST",
+					"Access-Control-Allow-Methods": "*",
 				},
 			});
+		} else if (path === "/health") {
+			return Response.json({ healthy: true });
 		} else {
-			return new Response("Unsupported method " + req.method, {
+			return new Response(`${req.method} on ${req.url} not found`, {
 				status: 404,
 			});
 		}
