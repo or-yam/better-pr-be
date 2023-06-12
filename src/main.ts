@@ -11,9 +11,7 @@ export function main() {
 			if (typeof body !== "object") throw Error("Failed to parse request body");
 
 			const prDiff = await getPRDiff(body);
-			const prDiffStr = await prDiff.text();
-
-			const comp = await getCompletions(prDiffStr);
+			const comp = await getCompletions(prDiff);
 			return Response.json(comp, {
 				status: 200,
 				headers: {

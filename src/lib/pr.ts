@@ -1,5 +1,6 @@
 import { PRMetadata } from "./types.ts";
 
-export function getPRDiff({ prUrl }: PRMetadata) {
-	return fetch(prUrl + ".diff", { method: "GET" });
+export async function getPRDiff({ prUrl }: PRMetadata) {
+	const resp = await fetch(prUrl + ".diff", { method: "GET" });
+	return resp.text();
 }
