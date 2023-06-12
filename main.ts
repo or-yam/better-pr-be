@@ -1,7 +1,12 @@
 import { serve } from "server";
 
+import { getCompletions } from "./lib/openai.ts";
+
 export function main(): void {
-	serve((_req: Request) => new Response("Hello World"));
+	serve(async (_req: Request) => {
+		const comp = await getCompletions();
+		return new Response(comp);
+	});
 }
 
 if (import.meta.main) {

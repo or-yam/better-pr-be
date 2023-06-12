@@ -4,6 +4,7 @@
 	},
 	"fmt": { "useTabs": true },
 	"imports": {
-		"server": "https://deno.land/std@0.155.0/http/server.ts"
+		"server": "https://deno.land/std@0.155.0/http/server.ts",
+		"openai": "https://deno.land/x/openai@1.4.0/mod.ts"
 	}
 }
